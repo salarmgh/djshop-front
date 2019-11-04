@@ -1,0 +1,4 @@
+@import "../../css/colors.scss";
+h1 {
+    color: $primaryColor;
+}
