@@ -1,0 +1,3 @@
+.navbar-menu.is-active {
+    color: yellow;
+}

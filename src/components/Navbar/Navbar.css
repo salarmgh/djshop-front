@@ -1,0 +1,15 @@
+.navbar-menu.is-active {
+    background-color: #363636;
+}
+
+.navbar-menu.is-active a {
+    color: white;
+}
+
+.navbar-menu.is-active a:hover {
+    background-color: #292929;
+}
+
+.nav .nav-toggle span {
+    background-color: #6a67ce;
+}

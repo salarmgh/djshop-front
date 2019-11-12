@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useState } from "react";
 import "bulma";
 import styles from "./Navbar.module.scss";
+import "./Navbar.css";
 
 interface NavbarProps {
   brand: {
@@ -11,6 +12,11 @@ interface NavbarProps {
 }
 
 const Navbar: React.SFC<NavbarProps> = props => {
+  const [burgerState, setBurgerState] = useState(false);
+  const burgerHandler = () => {
+    setBurgerState(!burgerState);
+  };
+
   return (
     <nav
       className="navbar is-dark"
@@ -29,10 +35,11 @@ const Navbar: React.SFC<NavbarProps> = props => {
         </a>
         <a
           role="button"
-          className="navbar-burger burger"
+          className={`navbar-burger burger${burgerState ? " is-active" : ""}`}
           aria-label="menu"
           aria-expanded="false"
           data-target="navbarBasicExample"
+          onClick={burgerHandler}
         >
           <span aria-hidden="true"></span>
           <span aria-hidden="true"></span>
@@ -40,18 +47,23 @@ const Navbar: React.SFC<NavbarProps> = props => {
         </a>
       </div>
 
-      <div id="navbarBasicExample" className="navbar-menu">
+      <div className={`navbar-menu${burgerState ? " is-active" : ""}`}>
         <div className="navbar-start">
           {props.links.map(link => {
             return (
-              <a className="navbar-item has-text-weight-bold" href={link.url}>
+              <a
+                className={`navbar-item has-text-weight-bold${
+                  burgerState ? " has-text-centered" : ""
+                  }`}
+                href={link.url}
+              >
                 {link.name}
               </a>
             );
           })}
         </div>
 
-        <div className="navbar-end">
+        <div className="nazvbar-end">
           <a
             href="/"
             className={
