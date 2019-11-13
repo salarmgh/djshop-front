@@ -1,6 +1,7 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "bulma";
 import styles from "./Navbar.module.scss";
+import axios from "axios";
 import "./Navbar.css";
 
 interface NavbarProps {
@@ -13,9 +14,20 @@ interface NavbarProps {
 
 const Navbar: React.SFC<NavbarProps> = props => {
   const [burgerState, setBurgerState] = useState(false);
+  const [categoriesState, setCategoriesState] = useState([{ name: "" }]);
+
   const burgerHandler = () => {
     setBurgerState(!burgerState);
   };
+
+  useEffect(() => {
+    axios
+      .get("http://localhost:8080/categories/")
+      .then(({ data }) => {
+        setCategoriesState(data.results);
+      })
+      .catch(err => { });
+  }, []);
 
   return (
     <nav
@@ -48,14 +60,14 @@ const Navbar: React.SFC<NavbarProps> = props => {
       </div>
 
       <div className={`navbar-menu${burgerState ? " is-active" : ""}`}>
-        <div className="navbar-start">
-          {props.links.map(link => {
+        <div className="navbar-start navbar-rtl">
+          {categoriesState.map(link => {
             return (
               <a
                 className={`navbar-item has-text-weight-bold${
                   burgerState ? " has-text-centered" : ""
                   }`}
-                href={link.url}
+                href={`/category/${link.name}/`}
               >
                 {link.name}
               </a>
@@ -63,22 +75,24 @@ const Navbar: React.SFC<NavbarProps> = props => {
           })}
         </div>
 
-        <div className="nazvbar-end">
+        <div className="navbar-end">
           <a
             href="/"
             className={
-              styles.signup + " is-size-5 navbar-item has-text-weight-bold"
+              styles.signup +
+              " is-size-5 navbar-item has-text-weight-bold has-text-centered"
             }
           >
-            Sign up
+            <p className={styles.centered}>ثبت نام</p>
           </a>
           <a
             href="/"
             className={
-              styles.signin + " is-size-5 navbar-item has-text-weight-bold"
+              styles.signin +
+              " is-size-5 navbar-item has-text-weight-bold has-text-centered"
             }
           >
-            <p className={styles.centered}>Log in</p>
+            <p className={styles.centered}>ورود به حساب کاربری</p>
           </a>
         </div>
       </div>

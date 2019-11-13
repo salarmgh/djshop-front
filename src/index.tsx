@@ -3,6 +3,7 @@ import ReactDOM from "react-dom";
 import "./index.css";
 import Router from "./containers/Router/Router";
 import * as serviceWorker from "./serviceWorker";
+import "shabnam-font/dist/font-face.css";
 
 ReactDOM.render(<Router />, document.getElementById("root"));
 

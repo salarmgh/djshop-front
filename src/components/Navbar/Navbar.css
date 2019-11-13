@@ -13,3 +13,24 @@
 .nav .nav-toggle span {
     background-color: #6a67ce;
 }
+
+.navbar-end a {
+    width: 100%;
+}
+
+.navbar-burger {
+    height: 80px;
+}
+
+.navbar-burger span {
+    width: 25px;
+}
+
+nav {
+    direction: rtl;
+}
+
+.nabar-rtl {
+    margin-right: 0;
+    margin-left: auto;
+}
