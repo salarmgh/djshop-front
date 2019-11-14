@@ -2,14 +2,47 @@
     background-color: darkcyan;
     width: 100px;
     margin: auto;
+    color: white;
 }
 
 .signin {
     background-color: darkslategray;
     width: 100px;
     margin: auto;
+    color: white;
 }
 
 .centered {
     margin: auto;
 }
+
+.navbarStartRtl {
+    margin-right: 0;
+    margin-left: auto;
+}
+
+.navbarEndRtl {
+    margin-left: 0;
+    margin-right: auto;
+}
+
+.navbarBurger {
+    height: 80px;
+}
+
+.rtl {
+    direction: rtl;
+}
+
+.navbarBurgerActive {
+    background-color: #363636;
+}
+
+.navbarMenuActivated {
+    color: white;
+}
+
+.navbarBurgerActive a:hover {
+    background-color: #292929;
+}
+

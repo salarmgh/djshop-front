@@ -3,19 +3,12 @@ import "bulma";
 import Brand from "./Brand";
 import Menu from "./Menu";
 import axios from "axios";
-import "./Navbar.css";
+import style from "./Navbar.module.scss";
 
-interface NavbarProps {
-  brand: {
-    url: string;
-    image: string;
-  };
-  links: { name: string; url: string }[];
-}
-
-const Navbar: React.SFC<NavbarProps> = props => {
+const Navbar = (props: { brandImage: string }) => {
   const [burgerState, setBurgerState] = useState(false);
   const [categoriesState, setCategoriesState] = useState([{ name: "" }]);
+  const backendBaseUrl: string = process.env.BACKEND_BASE_URL;
 
   const burgerHandler = () => {
     setBurgerState(!burgerState);
@@ -23,7 +16,7 @@ const Navbar: React.SFC<NavbarProps> = props => {
 
   useEffect(() => {
     axios
-      .get("http://localhost:8080/categories/")
+      .get(`${backendBaseUrl}/categories/`)
       .then(({ data }) => {
         setCategoriesState(data.results);
       })
@@ -32,12 +25,12 @@ const Navbar: React.SFC<NavbarProps> = props => {
 
   return (
     <nav
-      className="navbar is-dark"
+      className={`navbar is-dark ${style.rtl}`}
       role="navigation"
       aria-label="main navigation"
     >
       <Brand
-        image={props.brand.image}
+        image={props.brandImage}
         burgerState={burgerState}
         burgerHandler={burgerHandler}
       />

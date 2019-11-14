@@ -1,0 +1,21 @@
+import React from "react";
+import "bulma";
+
+const Links = () => {
+  return (
+    <div className="navbar-start navbar-rtl">
+      {props.categories.map(link => {
+        return (
+          <a
+            className={`navbar-item has-text-weight-bold${
+              props.burgerState ? " has-text-centered" : ""
+              }`}
+            href={`/category/${link.name}/`}
+          >
+            {link.name}
+          </a>
+        );
+      })}
+    </div>
+  );
+};
