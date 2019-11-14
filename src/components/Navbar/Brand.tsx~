@@ -1,0 +1,10 @@
+import React from "react";
+import "bulma";
+import BrandLogo from "./BrandLogo";
+import BurgerMenu from "./BurgerMenu";
+
+const Brand = (props: { image: string, burgerState: boolean, burgerHandler: () => void })
+<div className="navbar-brand">
+  <BrandLogo logo={props.image} />
+  <BurgerMenu burgerState={burgerState} burgerHandler={burgerHandler} />
+</div>

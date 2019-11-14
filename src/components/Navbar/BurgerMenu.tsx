@@ -1,0 +1,22 @@
+import React from "react";
+import "bulma";
+
+const Burger = (props: { burgerState: boolean; burgerHandler: () => void }) => {
+  return (
+    <a
+      role="button"
+      className={`navbar-burger burger${props.burgerState ? " is-active" : ""}`}
+      style={{ marginLeft: 0, marginRight: "auto" }}
+      aria-label="menu"
+      aria-expanded="false"
+      data-target="navbarBasicExample"
+      onClick={props.burgerHandler}
+    >
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+    </a>
+  );
+};
+
+export default Burger;

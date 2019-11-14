@@ -1,0 +1,13 @@
+const LogoBrand = () => {
+  return (
+    <a className="navbar-item" href={props.brand.url}>
+      <figure className="image is-64x64">
+        <img
+          className="is-rounded"
+          style={{ minHeight: "100%" }}
+          src={props.brand.image}
+        />
+      </figure>
+    </a>
+  );
+};

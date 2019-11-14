@@ -14,9 +14,9 @@
     background-color: #6a67ce;
 }
 
-.navbar-end a {
-    width: 100%;
-}
+/* .navbar-end a { */
+/*     width: 100%; */
+/* } */
 
 .navbar-burger {
     height: 80px;
@@ -30,7 +30,13 @@ nav {
     direction: rtl;
 }
 
-.nabar-rtl {
+.navbar-rtl {
     margin-right: 0;
     margin-left: auto;
 }
+
+.navbar-end-rtl {
+    margin-left: 0;
+    margin-right: auto;
+}
+
