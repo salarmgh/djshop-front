@@ -10,9 +10,10 @@ const Links = (props: {
     styles.navbarMenuActivated + " has-text-centered";
   return (
     <div className={`navbar-start ${styles.navbarStartRtl}`}>
-      {props.categories.map(link => {
+      {props.categories.map((link, index) => {
         return (
           <a
+            key={index}
             className={`navbar-item has-text-weight-bold ${
               props.burgerState ? burgerActivated : ""
               }`}

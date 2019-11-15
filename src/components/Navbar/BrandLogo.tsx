@@ -10,6 +10,7 @@ const BrandLogo: React.SFC<BrandLogoProps> = (props: { logo: string }) => {
     <a className="navbar-item" href="/">
       <figure className="image is-64x64">
         <img
+          alt="Anemone"
           className="is-rounded"
           style={{ minHeight: "100%" }}
           src={props.logo}
