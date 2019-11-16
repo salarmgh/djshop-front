@@ -1,0 +1,10 @@
+import React from "react";
+import Navbar from "../../components/Navbar/Navbar";
+import brandImage from "../../assets/images/brand.jpg";
+
+const page = props => {
+  <React.Fragment>
+    <Navbar brandImage={brandImage} />
+    {props.children}
+  </React.Fragment>;
+};

@@ -1,0 +1,18 @@
+import React from "react";
+import Magnifier from "react-magnifier";
+import "./Magnifier.css";
+
+const Image = (props: { image: string; size: string }) => {
+  return (
+    <React.Fragment>
+      <div className="columns">
+        <div className="column"></div>
+        <div className="column is-four-fifths">
+          <Magnifier src={props.image} />
+        </div>
+      </div>
+    </React.Fragment>
+  );
+};
+
+export default Image;

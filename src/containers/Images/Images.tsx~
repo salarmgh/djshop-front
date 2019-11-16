@@ -1,0 +1,5 @@
+import React from "react";
+
+const Images = (props: { images: string[] }) => { };
+
+export default Image;
