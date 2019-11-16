@@ -17,7 +17,9 @@ const Product = () => {
           <div className="column">
             <ProductImage images={images} size="square" />
           </div>
-          <div className="column"></div>
+          <div className="column">
+            <h1 className="title is-1">Kheili khafan product</h1>
+          </div>
         </div>
       </div>
     </Page>
