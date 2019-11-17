@@ -25,7 +25,7 @@ const Navbar = (props: { brandImage: string }) => {
 
   return (
     <nav
-      className={`navbar is-dark ${style.rtl}`}
+      className={`navbar is-dark ${style.rtl} ${style.nav}`}
       role="navigation"
       aria-label="main navigation"
     >

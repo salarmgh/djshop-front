@@ -1,15 +1,25 @@
 import React from "react";
 import ImageMagnifier from "../../components/ImageMagnifier/ImageMagnifier";
 import Images from "../../containers/Images/Images";
+import styles from "./ProductImage.module.scss";
 
-const ProductImage = (props: { images: string[]; size: string }) => {
+const ProductImage = (props: {
+  images: string[];
+  size: string;
+  index: number;
+  clickHandler: (event: React.MouseEvent<HTMLImageElement, MouseEvent>) => void;
+}) => {
   return (
     <div className="columns">
-      <div className="column">
-        <Images images={props.images} size={props.size} />
+      <div className={`column ${styles.imageList}`}>
+        <Images
+          images={props.images}
+          size={props.size}
+          clickHandler={props.clickHandler}
+        />
       </div>
       <div className="column is-four-fifths">
-        <ImageMagnifier image="https://instagram.fevn1-1.fna.fbcdn.net/vp/220ac8fcc232c397367a72a520b0bf24/5E4759DA/t51.2885-15/e35/s1080x1080/74448490_2556314537988766_6964396219630299901_n.jpg?_nc_ht=instagram.fevn1-1.fna.fbcdn.net&_nc_cat=110" />
+        <ImageMagnifier image={props.images[props.index]} />
       </div>
     </div>
   );
