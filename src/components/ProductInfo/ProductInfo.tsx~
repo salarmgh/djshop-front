@@ -1,8 +1,22 @@
 import React from "react";
 
-const ProductInfo = () => {
-  return (
-    <h1 className="title is-1">Kheili khafan product</h1>
-    <h3 className="title is-3">this is a sample</h3>
-  )
-}
+const ProductInfo = (props: {
+  id: number;
+  images: [
+    {
+      id: number;
+      image: string;
+      title: string;
+    }
+  ];
+  name: string;
+  product: {
+    id: number;
+    title: string;
+    description: string;
+    created_at: string;
+    featured: boolean;
+    slug: string;
+  };
+  price: number;
+}) => { };

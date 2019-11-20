@@ -1,0 +1,14 @@
+import React from "react";
+
+const ProductAttribute = (props: { name: string; value: string }) => {
+  return (
+    <tr>
+      <td>
+        <strong>{props.name}</strong>
+      </td>
+      <td>{props.value}</td>
+    </tr>
+  );
+};
+
+export default ProductAttribute;

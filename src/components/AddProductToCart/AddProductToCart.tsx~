@@ -1,0 +1,7 @@
+import React from "react";
+
+const AddProductToCart = (props: { title: string }) => {
+  return <button className="button is-light">{props.title}</button>;
+};
+
+export default AddProductToCart;

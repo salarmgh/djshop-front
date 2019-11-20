@@ -5,9 +5,14 @@
   -moz-osx-font-smoothing: grayscale;
   background-color: #525252;
   direction: rtl;
+  color: white;
 }
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+}
+
+button {
+    font-family: 'Shabnam', sans-serif !important;
 }

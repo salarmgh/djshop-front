@@ -10,18 +10,16 @@ const ProductImage = (props: {
   clickHandler: (event: React.MouseEvent<HTMLImageElement, MouseEvent>) => void;
 }) => {
   return (
-    <div className="columns">
-      <div className={`column ${styles.imageList}`}>
+    <React.Fragment>
+      <ImageMagnifier image={props.images[props.index]} />
+      <div style={{ overflow: "auto" }} className="columns is-flex-mobile">
         <Images
           images={props.images}
           size={props.size}
           clickHandler={props.clickHandler}
         />
       </div>
-      <div className="column is-four-fifths">
-        <ImageMagnifier image={props.images[props.index]} />
-      </div>
-    </div>
+    </React.Fragment>
   );
 };
 

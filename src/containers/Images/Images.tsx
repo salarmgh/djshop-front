@@ -10,13 +10,15 @@ const Images = (props: {
     <React.Fragment>
       {props.images.map((image, index) => {
         return (
-          <Image
-            key={index}
-            index={index}
-            image={image}
-            size={props.size}
-            clickHandler={props.clickHandler}
-          />
+          <div className="column is-one-quarter-mobile is-one-quarter">
+            <Image
+              key={index}
+              index={index}
+              image={image}
+              size={props.size}
+              clickHandler={props.clickHandler}
+            />
+          </div>
         );
       })}
     </React.Fragment>

@@ -14,7 +14,7 @@ const Image = (props: {
   clickHandler: (event: React.MouseEvent<HTMLImageElement, MouseEvent>) => void;
 }) => {
   return (
-    <figure className={`image is-${props.size} ${styles.imageItem}`}>
+    <figure className="image is-square">
       <img
         onClick={props.clickHandler}
         alt=""
