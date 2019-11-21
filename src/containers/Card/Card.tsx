@@ -1,10 +1,17 @@
 import React from "react";
 import styles from "./Card.module.scss";
 
-const Card = (props: { children: React.ReactNode }) => {
+const Card = (props: {
+  children: React.ReactNode;
+  color: string;
+  backgroundColor: string;
+}) => {
   return (
     <div className="card">
-      <div className={`card-content ${styles.cardContent}`}>
+      <div
+        style={{ color: props.color, backgroundColor: props.backgroundColor }}
+        className="card-content"
+      >
         {props.children}
       </div>
     </div>

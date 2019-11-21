@@ -1,5 +1,6 @@
 import React from "react";
 import Image from "../../components/Image/Image";
+import Card from "../Card/Card";
 
 const Images = (props: {
   images: string[];
@@ -10,7 +11,7 @@ const Images = (props: {
     <React.Fragment>
       {props.images.map((image, index) => {
         return (
-          <div className="column is-one-quarter-mobile is-one-quarter">
+          <div style={{ marginTop: "15px" }} className="column">
             <Image
               key={index}
               index={index}

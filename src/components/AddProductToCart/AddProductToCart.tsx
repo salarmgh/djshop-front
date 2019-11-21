@@ -3,12 +3,18 @@ import React from "react";
 const AddProductToCart = (props: {
   title: string;
   color: string;
+  backgroundColor: string;
   size: string;
 }) => {
   return (
     <button
-      style={{ width: props.size }}
-      className={`button is-light ${props.color}`}
+      style={{
+        border: 0,
+        width: props.size,
+        color: props.color,
+        backgroundColor: props.backgroundColor
+      }}
+      className={`button`}
     >
       {props.title}
     </button>

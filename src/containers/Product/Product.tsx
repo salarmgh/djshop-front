@@ -1,14 +1,14 @@
 import React, { useState, useEffect } from "react";
 import Page from "../Layouts/Page";
 import ProductImage from "../ProductImage/ProductImage";
-import ProductInfo from "../../components/ProductInfo/ProductInfo";
-import AddProductToCart from "../../components/AddProductToCart/AddProductToCart";
-import Card from "../Card/Card";
+import ProductContainer from "../ProductContainer/ProductContainer";
 import axios from "axios";
 
 const Product = () => {
   const backendUrl = process.env.REACT_APP_BACKEND_BASE_URL;
   const [imageIndex, setImageIndex] = useState(0);
+  const [basePrice, setBasePrice] = useState(0);
+  const [count, setCount] = useState(1);
   const [variant, setVariant] = useState({
     id: 0,
     images: [
@@ -39,6 +39,7 @@ const Product = () => {
   useEffect(() => {
     axios.get(`${backendUrl}/variants/1/`).then(({ data }) => {
       setVariant(data);
+      setBasePrice(data.price);
     });
   }, [backendUrl]);
 
@@ -57,27 +58,24 @@ const Product = () => {
 
   return (
     <Page>
-      <div className="hero is-fullheight">
+      <div className="container is-fluid">
         <div className="columns">
-          <div className="column">
-            <Card>
-              <ProductImage
-                images={images}
-                size="square"
-                index={imageIndex}
-                clickHandler={imageClickHandler}
-              />
-            </Card>
+          <div className="column is-two-fifths">
+            <ProductImage
+              images={images}
+              size="square"
+              index={imageIndex}
+              clickHandler={imageClickHandler}
+            />
           </div>
           <div className="column">
-            <Card>
-              <ProductInfo product={variant} />
-              <AddProductToCart
-                color="light"
-                size="100%"
-                title="افزودن به سبد خرید"
-              />
-            </Card>
+            <ProductContainer
+              variant={variant}
+              setVariant={setVariant}
+              count={count}
+              setCount={setCount}
+              basePrice={basePrice}
+            />
           </div>
         </div>
       </div>

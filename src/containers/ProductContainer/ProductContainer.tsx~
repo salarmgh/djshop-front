@@ -1,0 +1,39 @@
+import React from "react";
+import Card from "../Card/Card";
+import ProductInfo from "../../components/ProductInfo/ProductInfo";
+import PriceContainer from "../PriceContainer/PriceContainer";
+
+const ProductContainer = (props: {
+  variant: {
+    id: number;
+    images: {
+      id: number;
+      image: string;
+      title: string;
+    }[];
+    name: string;
+    product: {
+      id: number;
+      title: string;
+      description: string;
+      created_at: string;
+      featured: boolean;
+      slug: string;
+    };
+    price: number;
+    attributes: {
+      name: string;
+      value: string;
+    }[];
+  };
+  count: number;
+}) => {
+  return (
+    <Card color="white" backgroundColor="#414141">
+      <ProductInfo product={props.variant} />
+      <PriceContainer price={props.variant.price} count={props.count} />
+    </Card>
+  );
+};
+
+export default ProductContainer;

@@ -1,0 +1,70 @@
+import React from "react";
+import Card from "../Card/Card";
+import AddProductToCart from "../../components/AddProductToCart/AddProductToCart";
+import Price from "../../components/Price/Price";
+import "./number.css";
+
+const PriceContainer = (props: {
+  price: number;
+  count: number;
+  setCount: () => void;
+}) => {
+  return (
+    <Card color="white" backgroundColor="darkslategray">
+      <h3 style={{ color: "white" }} className="subtitle is-3">
+        <p>
+          قیمت: <Price price={props.price} />
+          <span style={{ color: "white" }} className="subtitle is-6">
+            تومان
+          </span>
+        </p>
+      </h3>
+      <span style={{ color: "white" }} className="subtitle is-5">
+        تعداد
+      </span>
+      <button
+        className="button"
+        style={{
+          color: "white",
+          backgroundColor: "darkcyan",
+          border: 0,
+          borderRadius: 0
+        }}
+      >
+        -
+      </button>
+      <input
+        type="number"
+        className="input number-input"
+        style={{
+          color: "white",
+          backgroundColor: "darkcyan",
+          marginBottom: "20px",
+          width: "50px",
+          border: "0",
+          borderRadius: "0"
+        }}
+      />
+      <button
+        className="button"
+        style={{
+          color: "white",
+          backgroundColor: "darkcyan",
+          border: 0,
+          borderRadius: 0
+        }}
+        onClick={event => { }}
+      >
+        +
+      </button>
+      <AddProductToCart
+        backgroundColor="darkcyan"
+        color="white"
+        size="100%"
+        title="افزودن به سبد خرید"
+      />
+    </Card>
+  );
+};
+
+export default PriceContainer;

@@ -1,0 +1,19 @@
+import React from "react";
+
+const Counter = (props: {count: number, setCount() => void}) => {
+  return (
+          <input
+        style={{
+          color: "white",
+          backgroundColor: "darkslategray",
+          border: 0,
+          width: "75px",
+          marginBottom: "25px"
+        }}
+        className="input"
+        type="number"
+        value={props.count}
+      />
+
+  )
+}

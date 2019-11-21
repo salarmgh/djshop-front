@@ -2,6 +2,7 @@ import React from "react";
 import ImageMagnifier from "../../components/ImageMagnifier/ImageMagnifier";
 import Images from "../../containers/Images/Images";
 import styles from "./ProductImage.module.scss";
+import Card from "../Card/Card";
 
 const ProductImage = (props: {
   images: string[];
@@ -10,16 +11,16 @@ const ProductImage = (props: {
   clickHandler: (event: React.MouseEvent<HTMLImageElement, MouseEvent>) => void;
 }) => {
   return (
-    <React.Fragment>
+    <Card color="white" backgroundColor="#414141">
       <ImageMagnifier image={props.images[props.index]} />
-      <div style={{ overflow: "auto" }} className="columns is-flex-mobile">
+      <div className="columns is-flex-mobile">
         <Images
           images={props.images}
           size={props.size}
           clickHandler={props.clickHandler}
         />
       </div>
-    </React.Fragment>
+    </Card>
   );
 };
 

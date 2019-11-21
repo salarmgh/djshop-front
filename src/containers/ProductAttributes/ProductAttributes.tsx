@@ -6,17 +6,15 @@ const ProductAttributes = (props: {
   attributes: { name: string; value: string }[];
 }) => {
   return (
-    <div className="card">
-      <div className="card-content">
-        <table className={`table is-striped is-fullwidth ${styles.attributes}`}>
-          {props.attributes.map(attribute => {
-            return (
-              <ProductAttribute name={attribute.name} value={attribute.value} />
-            );
-          })}
-        </table>
-      </div>
-    </div>
+    <React.Fragment>
+      <ul className={styles.attributes}>
+        {props.attributes.map(attribute => {
+          return (
+            <ProductAttribute name={attribute.name} value={attribute.value} />
+          );
+        })}
+      </ul>
+    </React.Fragment>
   );
 };
 
