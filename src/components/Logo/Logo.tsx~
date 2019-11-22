@@ -1,0 +1,11 @@
+import React from "react";
+
+const Logo = (props: {image: string, size: string}) => {
+  return (
+                <a href="/">
+              <figure className="image is-96x96">
+                <img src={props.logo} className="is-rounded" />
+              </figure>
+            </a>
+  )
+}

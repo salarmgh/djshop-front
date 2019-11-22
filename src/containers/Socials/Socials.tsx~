@@ -1,0 +1,15 @@
+import React from "react";
+
+const Socials = (props: {socials: {social: string, url: string}[]}) => {
+  return (
+                <p className="has-text-centered">
+              <i className="fab fa-instagram"></i>
+            </p>
+            <p className="has-text-centered">
+              <i className="fab fa-twitter"></i>
+            </p>
+            <p className="has-text-centered">
+              <i className="fab fa-youtube"></i>
+            </p>
+  )
+}

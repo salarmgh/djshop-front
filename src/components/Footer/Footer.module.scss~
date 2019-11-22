@@ -1,0 +1,5 @@
+.pageFooter {
+           backgroundColor: "#363636",
+          color: "white",
+          marginTop: "25px"
+ }

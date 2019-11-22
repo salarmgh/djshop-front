@@ -2,7 +2,7 @@ import React from "react";
 import Card from "../Card/Card";
 import AddProductToCart from "../../components/AddProductToCart/AddProductToCart";
 import Price from "../../components/Price/Price";
-import "./number.css";
+import Counter from "../../components/Counter/Counter";
 
 const PriceContainer = (props: {
   price: number;
@@ -26,55 +26,13 @@ const PriceContainer = (props: {
           </h3>
         </div>
         <div className="column">
-          <button
-            className="button"
-            style={{
-              color: "white",
-              backgroundColor: "darkcyan",
-              border: 0,
-              borderRadius: 0,
-              width: "33%"
-            }}
-            onClick={event => {
-              if (props.count > 1) {
-                props.setCount(props.count - 1);
-                props.variant.price = props.basePrice * (props.count - 1);
-                props.setVariant(props.variant);
-              }
-            }}
-          >
-            -
-          </button>
-          <input
-            type="number"
-            className="input number-input has-text-centered"
-            style={{
-              color: "white",
-              backgroundColor: "darkcyan",
-              marginBottom: "20px",
-              width: "34%",
-              border: "0",
-              borderRadius: "0"
-            }}
-            value={props.count}
+          <Counter
+            count={props.count}
+            setCount={props.setCount}
+            variant={props.variant}
+            setVariant={props.setVariant}
+            basePrice={props.basePrice}
           />
-          <button
-            className="button"
-            style={{
-              color: "white",
-              backgroundColor: "darkcyan",
-              border: 0,
-              borderRadius: 0,
-              width: "33%"
-            }}
-            onClick={event => {
-              props.setCount(props.count + 1);
-              props.variant.price = props.basePrice * (props.count + 1);
-              props.setVariant(props.variant);
-            }}
-          >
-            +
-          </button>
           <AddProductToCart
             backgroundColor="darkcyan"
             color="white"
