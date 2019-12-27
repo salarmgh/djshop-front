@@ -7,7 +7,7 @@ export default function App() {
   return (
     <Router>
       <Switch>
-        <Route exact path="/product">
+        <Route path="/product/:pc">
           <Product />
         </Route>
         <Route exact path="/">

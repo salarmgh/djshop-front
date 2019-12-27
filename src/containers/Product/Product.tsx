@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { useParams } from "react-router-dom";
 import Page from "../Layouts/Page";
 import ProductImage from "../ProductImage/ProductImage";
 import ProductContainer from "../ProductContainer/ProductContainer";
@@ -35,9 +36,10 @@ const Product = () => {
       }
     ]
   });
+let { pc } = useParams();
 
-  useEffect(() => {
-    axios.get(`${backendUrl}/variants/1/`).then(({ data }) => {
+useEffect(() => {
+    axios.get(`${backendUrl}/variants/${pc}/`).then(({ data }) => {
       setVariant(data);
       setBasePrice(data.price);
     });
