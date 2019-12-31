@@ -1,5 +1,4 @@
 import React from "react";
-import styles from "./Image.module.scss";
 
 declare module "react" {
   interface ImgHTMLAttributes<T> extends HTMLAttributes<T> {

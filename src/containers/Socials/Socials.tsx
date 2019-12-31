@@ -5,7 +5,7 @@ const Socials = (props: { socials: { social: string; url: string }[] }) => {
     <React.Fragment>
       {props.socials.map((social: any, index) => {
         return (
-          <p>
+          <p key={index}>
             <a href={social.url} className="has-text-centered">
               <i className={`fab fa-${social.social}`}></i>
             </a>

@@ -1,7 +1,6 @@
 import React from "react";
 import ImageMagnifier from "../../components/ImageMagnifier/ImageMagnifier";
 import Images from "../../containers/Images/Images";
-import styles from "./ProductImage.module.scss";
 import Card from "../Card/Card";
 
 const ProductImage = (props: {

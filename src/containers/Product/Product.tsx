@@ -43,7 +43,7 @@ useEffect(() => {
       setVariant(data);
       setBasePrice(data.price);
     });
-  }, [backendUrl]);
+  }, [backendUrl, pc]);
 
   const imageClickHandler = (
     event: React.MouseEvent<HTMLImageElement, MouseEvent>

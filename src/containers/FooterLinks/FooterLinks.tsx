@@ -5,7 +5,7 @@ const FooterLinks = (props: { links: { title: string; url: string }[] }) => {
     <React.Fragment>
       {props.links.map((link: any, index) => {
         return (
-          <p className="has-text-centered">
+          <p key={index} className="has-text-centered">
             <a href={link.url} className="">
               {link.title}
             </a>
