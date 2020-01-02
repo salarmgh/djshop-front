@@ -132,7 +132,11 @@ const Category = () => {
     //if (currentPrice[0] !== -1 && currentPrice[1] !== -1) {
     // fetchFilters["min_price"] = currentPrice[0];
     //fetchFilters["max_price"] = currentPrice[1];
-    //} 
+    //}
+    if (currentPrice[0] !== -1 && currentPrice[1] !== -1) {
+      fetchFilters["min_price"] = currentPrice[0];
+      fetchFilters["max_price"] = currentPrice[1];
+    }
     const stringified = queryString.stringify(fetchFilters);
 
     setQueryStr(stringified);
