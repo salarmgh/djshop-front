@@ -8,6 +8,7 @@ import PriceSlider from "../../components/PriceSlider/PriceSlider";
 
 
 const Category = () => {
+  const queryString = require('query-string');
   const backendUrl = process.env.REACT_APP_BACKEND_BASE_URL;
   const [filterAttributes, setFilterAttributes] = useState({});
   const [category, setCategory] = useState({
@@ -33,7 +34,8 @@ const Category = () => {
     name: "attribute",
     attributes: [
       {
-        value: "value"
+        value: "value",
+        checked: false
       }
     ]
   }]);
@@ -53,39 +55,84 @@ const Category = () => {
   }]);
 
   useEffect(() => {
+    const queryParsed = queryString.parse(window.location.search);
+    let filters = {};
+    if (Array.isArray(queryParsed.attributes)) {
+      queryParsed.attributes.forEach((attribute) => {
+        let key = attribute.split(':')[0];
+        let value = attribute.split(':')[1];
+        filters[key] = value;
+      })
+    } else {
+      let key = queryParsed.attributes.split(':')[0];
+      let value = queryParsed.attributes.split(':')[1];
+      filters[key] = value;
+    }
     axios.get(`${backendUrl}/categories/necklace/`).then(({ data }) => {
       setCategory(data);
-      setAttributes(data.attributes);
+      const categoryAttributes = data.attributes.slice();
+      categoryAttributes.forEach((categoryAttribute) => {
+        for (let key in filters) {
+          categoryAttributes.forEach((categoryAttribute) => {
+            categoryAttribute.attributes.forEach((attribute) => {
+              attribute.checked = false;
+            })
+          })
+        }
+      })
+      categoryAttributes.forEach((categoryAttribute) => {
+        for (let key in filters) {
+          categoryAttributes.forEach((categoryAttribute) => {
+            categoryAttribute.attributes.forEach((attribute) => {
+              if (attribute.value === filters[key]) {
+                attribute.checked = true;
+              }
+            })
+          })
+        }
+      })
+
+      setAttributes(categoryAttributes);
     });
   }, [backendUrl]);
 
 
 
   useEffect(() => {
+    const filters = attributes.slice();
+    const fetchFilters = { attributes: [] };
+
+    filters.forEach((attribute) => {
+      attribute.attributes.forEach((item) => {
+        fetchFilters.attributes.push(attribute.name + ":" + item["value"]);
+      })
+    })
     axios.get(`${backendUrl}/search/?categories=Necklace`).then(({ data }) => {
       setProducts(data);
     });
-  }, [backendUrl]);
+  }, [backendUrl, attributes]);
 
   const filterCheckHandler = (
     event: any
   ) => {
-    const attributes = { ...filterAttributes };
+    const attributesFilter = attributes.slice();
     const key = event.target.value.split("|")[0];
     const value = event.target.value.split("|")[1];
-    if (event.target.checked === true) {
-      attributes[key] = value;
-    } else {
-      delete attributes[key];
+    for (let attribute of attributesFilter) {
+      if (attribute.name === key) {
+        for (let attributeValue of attribute.attributes) {
+          if (attributeValue.value === value) {
+            if (attributeValue.checked === false) {
+              attributeValue.checked = true;
+            } else {
+              attributeValue.checked = false;
+            }
+          }
+        }
+      }
     }
-    setFilterAttributes(attributes);
-    for (let key in attributes) {
-      console.log(key + "|" + attributes[key]);
-    }
+    setAttributes(attributesFilter);
   };
-
-  const queryString = require('query-string');
-
 
   return (
     <Page>
