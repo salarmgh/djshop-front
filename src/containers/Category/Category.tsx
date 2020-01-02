@@ -10,7 +10,9 @@ import PriceSlider from "../../components/PriceSlider/PriceSlider";
 const Category = () => {
   const queryString = require('query-string');
   const backendUrl = process.env.REACT_APP_BACKEND_BASE_URL;
-  const [filterAttributes, setFilterAttributes] = useState({});
+  const [queryStr, setQueryStr] = useState("");
+  const [price, setPrice] = useState([10000, 10000000]);
+  const [currentPrice, setCurrentPrice] = useState([-1, -1]);
   const [category, setCategory] = useState({
     id: 0,
     image: "https://bulma.io/images/placeholders/1280x960.png",
@@ -57,35 +59,53 @@ const Category = () => {
   useEffect(() => {
     const queryParsed = queryString.parse(window.location.search);
     let filters = {};
-    if (Array.isArray(queryParsed.attributes)) {
-      queryParsed.attributes.forEach((attribute) => {
-        let key = attribute.split(':')[0];
-        let value = attribute.split(':')[1];
-        filters[key] = value;
-      })
-    } else {
-      let key = queryParsed.attributes.split(':')[0];
-      let value = queryParsed.attributes.split(':')[1];
-      filters[key] = value;
+    if (typeof queryParsed !== 'undefined') {
+      if (Array.isArray(queryParsed.attribute)) {
+        queryParsed.attribute.forEach((attribute) => {
+          let key = attribute.split(':')[0];
+          let value = attribute.split(':')[1];
+          if (Array.isArray(filters[key])) {
+            filters[key].push(value);
+          } else {
+            filters[key] = [value]
+          }
+        })
+      } else if (typeof queryParsed.attribute === 'string') {
+        let key = queryParsed.attribute.split(':')[0];
+        let value = queryParsed.attribute.split(':')[1];
+        filters[key] = [value];
+      }
+
+      /* if (typeof queryParsed["min_price"] !== 'undefined') {
+       *   setCurrentPrice([parseInt(queryParsed["min_price"]), currentPrice[1]]);
+       * }
+       * if (typeof queryParsed["max_price"] !== 'undefined') {
+       *   setCurrentPrice([currentPrice[0], parseInt(queryParsed["max_price"])]);
+       * } */
     }
+
     axios.get(`${backendUrl}/categories/necklace/`).then(({ data }) => {
       setCategory(data);
       const categoryAttributes = data.attributes.slice();
       categoryAttributes.forEach((categoryAttribute) => {
-        for (let key in filters) {
-          categoryAttributes.forEach((categoryAttribute) => {
-            categoryAttribute.attributes.forEach((attribute) => {
-              attribute.checked = false;
-            })
+        categoryAttributes.forEach((categoryAttribute) => {
+          categoryAttribute.attributes.forEach((attribute) => {
+            attribute.checked = false;
           })
-        }
+        })
+
       })
       categoryAttributes.forEach((categoryAttribute) => {
+
         for (let key in filters) {
           categoryAttributes.forEach((categoryAttribute) => {
             categoryAttribute.attributes.forEach((attribute) => {
-              if (attribute.value === filters[key]) {
-                attribute.checked = true;
+              if (Array.isArray(filters[key])) {
+                filters[key].forEach((filterValue) => {
+                  if (filterValue === attribute.value) {
+                    attribute.checked = true;
+                  }
+                })
               }
             })
           })
@@ -94,23 +114,51 @@ const Category = () => {
 
       setAttributes(categoryAttributes);
     });
-  }, [backendUrl]);
+  }, [backendUrl, queryString]);
 
 
 
   useEffect(() => {
-    const filters = attributes.slice();
-    const fetchFilters = { attributes: [] };
+    let filters: { id: number, name: string, attributes: { value: string, checked: boolean }[] }[] = attributes.slice();
+    let fetchFilters: { attribute: string[]; } = { attribute: [] };
 
     filters.forEach((attribute) => {
       attribute.attributes.forEach((item) => {
-        fetchFilters.attributes.push(attribute.name + ":" + item["value"]);
+        if (item.checked) {
+          fetchFilters.attribute.push(attribute["name"] + ":" + item["value"]);
+        }
       })
     })
-    axios.get(`${backendUrl}/search/?categories=Necklace`).then(({ data }) => {
-      setProducts(data);
+    //if (currentPrice[0] !== -1 && currentPrice[1] !== -1) {
+    // fetchFilters["min_price"] = currentPrice[0];
+    //fetchFilters["max_price"] = currentPrice[1];
+    //} 
+    const stringified = queryString.stringify(fetchFilters);
+
+    setQueryStr(stringified);
+
+
+    if (stringified !== '') {
+      window.history.pushState('', '', window.location.pathname + "?" + stringified);
+    }
+
+    axios.get(`${backendUrl}/search/?categories=Necklace&${stringified}`).then(({ data }) => {
+      setProducts(data.results);
+      setPrice([data.price_min, data.price_max]);
+      if (currentPrice[0] === -1 && currentPrice[1] === -1) {
+        const queryParsed = queryString.parse(window.location.search);
+        let min_price = data.price_min;
+        let max_price = data.price_max;
+        if (typeof queryParsed["min_price"] !== 'undefined') {
+          min_price = parseInt(queryParsed["min_price"]);
+        }
+        if (typeof queryParsed["max_price"] !== 'undefined') {
+          max_price = parseInt(queryParsed["max_price"]);
+        }
+        setCurrentPrice([min_price, max_price]);
+      }
     });
-  }, [backendUrl, attributes]);
+  }, [backendUrl, attributes, queryStr, currentPrice]);
 
   const filterCheckHandler = (
     event: any
@@ -134,6 +182,11 @@ const Category = () => {
     setAttributes(attributesFilter);
   };
 
+  const filterPriceHandler = (event: any) => {
+    setCurrentPrice([event[0], event[1]])
+    console.log(event);
+  }
+
   return (
     <Page>
       <div className="container is-fluid">
@@ -141,7 +194,7 @@ const Category = () => {
         <div className="columns">
           <div className="column is-one-quarter">
             <Filters onChange={filterCheckHandler} attributes={attributes} />
-            <PriceSlider min={1000} max={100000} defaultMin={10000} defaultMax={50000} />
+            <PriceSlider onChange={filterPriceHandler} min={price[0]} max={price[1]} currentMin={currentPrice[0]} currentMax={currentPrice[1]} />
           </div>
           <div className="column">
             <div className="columns is-multiline">
