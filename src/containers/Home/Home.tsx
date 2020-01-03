@@ -1,8 +1,16 @@
-import React from "react";
-import styles from "./Home.module.scss";
+import React, { useEffect, useState } from "react";
+import Carousel from "../Carousel/Carousel";
 
 const Home = () => {
-  return <h1 className={styles.primary}>Home!</h1>;
+  const [images, setImages] = useState(["https://colorlib.com/preview/theme/essence/img/bg-img/bg-1.jpg"]);
+  useEffect(() => {
+    setImages(["https://colorlib.com/preview/theme/essence/img/bg-img/bg-1.jpg", "https://colorlib.com/preview/theme/essence/img/bg-img/bg-1.jpg", "https://colorlib.com/preview/theme/essence/img/bg-img/bg-1.jpg"]);
+  }, [])
+  return (
+    <section>
+      <Carousel images={images} />
+    </section>
+  )
 };
 
 export default Home;

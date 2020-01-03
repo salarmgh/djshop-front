@@ -1,6 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import "./index.css";
+import "bulma";
+//import "./index.css";
 import Router from "./containers/Router/Router";
 import * as serviceWorker from "./serviceWorker";
 import "shabnam-font/dist/font-face.css";
