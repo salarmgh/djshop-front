@@ -7,12 +7,10 @@ const Carousel = (props: { images: string[] }) => {
 
   const next = () => {
     if (imageIndex === props.images.length - 1) {
-      console.log("MATCHED")
       setImageIndex(0);
     } else {
       setImageIndex(imageIndex + 1);
     }
-    console.log(imageIndex);
   }
 
   const prev = () => {
@@ -21,17 +19,18 @@ const Carousel = (props: { images: string[] }) => {
     } else {
       setImageIndex(imageIndex - 1);
     }
-    console.log(imageIndex);
   }
 
   return (
-    <section>
-      <div className="carousel">
-        <ImageSlides images={props.images} imageIndex={imageIndex} />
-      </div>
-      <button onClick={next}>Next</button>
-      <button onClick={prev}>Prev</button>
+    <section style={{ position: "relative" }}>
 
+
+      <div className="carousel" style={{ position: "relative", top: 0, left: 0 }}>
+
+        <ImageSlides images={props.images} imageIndex={imageIndex} />
+        <a style={{ position: "absolute", width: "30%", height: "100%" }} onClick={prev} />
+        <a style={{ position: "absolute", right: 0, width: "30%", height: "100%" }} onClick={next} />
+      </div>
     </section>
   )
 }
