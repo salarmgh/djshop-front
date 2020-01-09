@@ -1,22 +1,25 @@
 import React from "react";
 import ImageSlide from "./ImageSlide";
+import Arrows from "./Arrows";
 
-const ImageSlides = (props: { images: string[], imageIndex: number }) => {
+const ImageSlides = (props: { images: any, handler: any }) => {
   return (
-    <React.Fragment>
+    <div className="slideshow-container">
       {
         props.images.map((image, index) => {
-          let active = 0;
-          if (index === props.imageIndex) {
-            active = 1;
-          }
           return (
-            <ImageSlide image={image} active={1} index={index} key={index} />
+            <React.Fragment>
+              <div className="slides fade" style={{ display: image.display ? "block" : "none" }}>
+                <div className="numbertext">{index} / {props.images.length}</div>
+                <ImageSlide image={image} />
+                <div className="text">Caption Text</div>
+              </div>
+            </React.Fragment>
           )
         })
-
       }
-    </React.Fragment>
+      <Arrows handler={props.handler} />
+    </div >
   )
 }
 

@@ -1,10 +1,8 @@
 import React from 'react';
 
-const ImageSlide = (props: { image: string, active: number, index: number }) => {
+const ImageSlide = (props: { image: any }) => {
   return (
-
-    <img style={{ position: "absolute" }} alt="" src={props.image} />
-
+    <img alt="" src={props.image.url} style={{ width: "100%" }} />
   )
 }
 export default ImageSlide;

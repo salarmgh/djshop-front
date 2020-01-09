@@ -1,37 +1,49 @@
 import React, { useState } from 'react';
 import ImageSlides from './ImageSlides';
-
+import Arrows from "./Arrows";
+import Dots from "./Dots";
+import "./test.css";
 
 const Carousel = (props: { images: string[] }) => {
-  const [imageIndex, setImageIndex] = useState(0);
 
-  const next = () => {
-    if (imageIndex === props.images.length - 1) {
-      setImageIndex(0);
-    } else {
-      setImageIndex(imageIndex + 1);
+  const [index, setIndex] = useState(0);
+  const [images, setImages] = useState([{ url: "https://colorlib.com/preview/theme/essence/img/bg-img/bg-1.jpg", display: true }, { url: "https://colorlib.com/preview/theme/essence/img/bg-img/bg-1.jpg", display: false }, { url: "https://colorlib.com/preview/theme/essence/img/bg-img/bg-1.jpg", display: false }]);
+
+  const currentSlide = (n: number) => {
+    return (event: React.MouseEvent) => {
+      const currentImages = [...images];
+      const currentIndex = index;
+      currentImages[currentIndex].display = false;
+      currentImages[n].display = true;
+      setIndex(n);
+      setImages(currentImages);
     }
   }
 
-  const prev = () => {
-    if (imageIndex === 0) {
-      setImageIndex(props.images.length);
-    } else {
-      setImageIndex(imageIndex - 1);
+  const changeSlide = (n: number) => {
+    return (event: React.MouseEvent) => {
+      const currentIndex = index;
+      let newIndex = currentIndex + n;
+      const currentImages = [...images];
+
+      if (newIndex === -1) {
+        newIndex = currentImages.length - 1;
+      } else if (newIndex === currentImages.length) {
+        newIndex = 0;
+      }
+      console.log(newIndex);
+      currentImages[currentIndex].display = false;
+      currentImages[newIndex].display = true;
+      setIndex(newIndex);
+      setImages(currentImages);
     }
   }
 
   return (
-    <section style={{ position: "relative" }}>
-
-
-      <div className="carousel" style={{ position: "relative", top: 0, left: 0 }}>
-
-        <ImageSlides images={props.images} imageIndex={imageIndex} />
-        <a style={{ position: "absolute", width: "30%", height: "100%" }} onClick={prev} />
-        <a style={{ position: "absolute", right: 0, width: "30%", height: "100%" }} onClick={next} />
-      </div>
-    </section>
+    <React.Fragment>
+      <ImageSlides images={images} handler={changeSlide} />
+      <Dots images={images} handler={currentSlide} active={index} />
+    </React.Fragment >
   )
 }
 
