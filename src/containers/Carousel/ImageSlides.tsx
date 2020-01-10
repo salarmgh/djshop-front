@@ -10,9 +10,8 @@ const ImageSlides = (props: { images: any, handler: any }) => {
           return (
             <React.Fragment>
               <div className="slides fade" style={{ display: image.display ? "block" : "none" }}>
-                <div className="numbertext">{index} / {props.images.length}</div>
                 <ImageSlide image={image} />
-                <div className="text">Caption Text</div>
+                <div className="text">{image.title}</div>
               </div>
             </React.Fragment>
           )

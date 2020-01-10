@@ -13,7 +13,7 @@ const PriceContainer = (props: {
   basePrice: number;
 }) => {
   return (
-    <Card color="white" backgroundColor="darkslategray">
+    <Card>
       <div className="columns">
         <div className="column">
           <h3 style={{ color: "white" }} className="subtitle is-2">

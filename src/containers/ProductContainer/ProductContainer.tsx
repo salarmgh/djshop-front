@@ -32,7 +32,7 @@ const ProductContainer = (props: {
   basePrice: number;
 }) => {
   return (
-    <Card color="white" backgroundColor="#414141">
+    <Card>
       <ProductInfo product={props.variant} />
       <PriceContainer
         price={props.variant.price}

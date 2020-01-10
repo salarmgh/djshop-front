@@ -10,7 +10,7 @@ const ProductImage = (props: {
   clickHandler: (event: React.MouseEvent<HTMLImageElement, MouseEvent>) => void;
 }) => {
   return (
-    <Card color="white" backgroundColor="#414141">
+    <Card>
       <ImageMagnifier image={props.images[props.index]} />
       <div className="columns is-flex-mobile">
         <Images

@@ -1,13 +1,28 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import ImageSlides from './ImageSlides';
 import Arrows from "./Arrows";
 import Dots from "./Dots";
 import "./test.css";
 
-const Carousel = (props: { images: string[] }) => {
+const Carousel = (props: { images: any }) => {
 
   const [index, setIndex] = useState(0);
-  const [images, setImages] = useState([{ url: "https://colorlib.com/preview/theme/essence/img/bg-img/bg-1.jpg", display: true }, { url: "https://colorlib.com/preview/theme/essence/img/bg-img/bg-1.jpg", display: false }, { url: "https://colorlib.com/preview/theme/essence/img/bg-img/bg-1.jpg", display: false }]);
+  const [images, setImages] = useState([{ image: "", display: true }]);
+
+  useEffect(() => {
+    let imagesProp: any = [];
+    props.images.map((image, index) => {
+      const currentImage = { ...image };
+      if (index === 1) {
+        currentImage["display"] = true;
+      } else {
+        currentImage["display"] = false;
+      }
+      imagesProp.push(currentImage);
+    });
+    setImages(imagesProp);
+  }, [props.images]);
+
 
   const currentSlide = (n: number) => {
     return (event: React.MouseEvent) => {
@@ -31,7 +46,6 @@ const Carousel = (props: { images: string[] }) => {
       } else if (newIndex === currentImages.length) {
         newIndex = 0;
       }
-      console.log(newIndex);
       currentImages[currentIndex].display = false;
       currentImages[newIndex].display = true;
       setIndex(newIndex);
@@ -40,10 +54,10 @@ const Carousel = (props: { images: string[] }) => {
   }
 
   return (
-    <React.Fragment>
+    <section>
       <ImageSlides images={images} handler={changeSlide} />
       <Dots images={images} handler={currentSlide} active={index} />
-    </React.Fragment >
+    </section>
   )
 }
 
