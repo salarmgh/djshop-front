@@ -12,7 +12,7 @@ const ProductImage = (props: {
   return (
     <Card>
       <ImageMagnifier image={props.images[props.index]} />
-      <div className="columns is-flex-mobile">
+      <div style={{ overflow: "auto" }} className="columns is-flex-mobile">
         <Images
           images={props.images}
           size={props.size}

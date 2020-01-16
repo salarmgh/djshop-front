@@ -36,14 +36,14 @@ const Product = () => {
       }
     ]
   });
-let { pc } = useParams();
+  let { slug } = useParams();
 
-useEffect(() => {
-    axios.get(`${backendUrl}/variants/${pc}/`).then(({ data }) => {
+  useEffect(() => {
+    axios.get(`${backendUrl}/variants/${slug}/`).then(({ data }) => {
       setVariant(data);
       setBasePrice(data.price);
     });
-  }, [backendUrl, pc]);
+  }, [backendUrl, slug]);
 
   const imageClickHandler = (
     event: React.MouseEvent<HTMLImageElement, MouseEvent>
@@ -60,7 +60,7 @@ useEffect(() => {
 
   return (
     <Page>
-      <div className="container is-fluid">
+      <div style={{ direction: "rtl" }} className="container is-fluid">
         <div className="columns">
           <div className="column is-two-fifths">
             <ProductImage

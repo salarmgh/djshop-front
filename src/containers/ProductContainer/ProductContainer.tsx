@@ -32,17 +32,25 @@ const ProductContainer = (props: {
   basePrice: number;
 }) => {
   return (
-    <Card>
-      <ProductInfo product={props.variant} />
-      <PriceContainer
-        price={props.variant.price}
-        variant={props.variant}
-        setVariant={props.setVariant}
-        count={props.count}
-        setCount={props.setCount}
-        basePrice={props.basePrice}
-      />
-    </Card>
+    <section className="section is-medium">
+      <div className="container">
+        <div className="columns">
+          <div className="column">
+            <ProductInfo product={props.variant} />
+          </div>
+          <div className="column">
+            <PriceContainer
+              price={props.variant.price}
+              variant={props.variant}
+              setVariant={props.setVariant}
+              count={props.count}
+              setCount={props.setCount}
+              basePrice={props.basePrice}
+            />
+          </div>
+        </div>
+      </div>
+    </section>
   );
 };
 

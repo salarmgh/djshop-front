@@ -1,6 +1,7 @@
 import React from "react";
 import ProductAttributes from "../../containers/ProductAttributes/ProductAttributes";
-import styles from "./ProductInfo.module.scss";
+import "@fortawesome/fontawesome-free";
+//import styles from "./ProductInfo.module.scss";
 
 const ProductInfo = (props: {
   product: {
@@ -28,9 +29,10 @@ const ProductInfo = (props: {
 }) => {
   return (
     <React.Fragment>
-      <h1 className={`title is-3 ${styles.header}`}>
+      <h1 className="title is-3">
         {props.product.product.title} {props.product.name}
       </h1>
+      <div className="is-divider"></div>
       <p>{props.product.product.description}</p>
       <ProductAttributes attributes={props.product.attributes} />
     </React.Fragment>

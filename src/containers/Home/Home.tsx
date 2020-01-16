@@ -37,6 +37,12 @@ const Home = () => {
     });
   }, [backendUrl]);
 
+  useEffect(() => {
+    axios.get(`${backendUrl}/featured-product/`).then(({ data }) => {
+      setPromotedProducts(data.results);
+    });
+  }, [backendUrl]);
+
   return (
     <Page>
       <Carousel images={carouselImages} />

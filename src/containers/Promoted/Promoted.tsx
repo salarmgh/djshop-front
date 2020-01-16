@@ -13,20 +13,20 @@ const Promoted = (props: { products: any }) => {
                 <Card>
                   <div className="card-image">
                     <figure className="image is-1by1">
-                      <img src={product.image} alt="Placeholder image" />
+                      <img src={product.image.image} alt="Placeholder image" />
                     </figure>
                   </div>
 
                   <div className="card-content">
-                    <a href={product.url}>
+                    <a href={`/product/${product.slug}/`}>
                       <div className="media">
                         <div className="media-content">
-                          <p className="title is-4">{product.title}</p>
+                          <p className="title is-4">{product.name}</p>
                         </div>
                       </div>
                     </a>
                     <div className="content">
-                      {product.content}
+                      {product.description}
                     </div>
                   </div>
                 </Card>

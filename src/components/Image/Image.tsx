@@ -13,8 +13,9 @@ const Image = (props: {
   clickHandler: (event: React.MouseEvent<HTMLImageElement, MouseEvent>) => void;
 }) => {
   return (
-    <figure className="image is-square">
+    <figure className="image">
       <img
+        className="is-rounded"
         onClick={props.clickHandler}
         alt=""
         data-index={props.index}

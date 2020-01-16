@@ -10,7 +10,7 @@ const Images = (props: {
     <React.Fragment>
       {props.images.map((image, index) => {
         return (
-          <div style={{ marginTop: "15px" }} className="column">
+          <div style={{ marginTop: "15px" }} className="column is-one-quarter">
             <Image
               key={index}
               index={index}
