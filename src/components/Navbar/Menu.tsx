@@ -5,7 +5,7 @@ import Buttons from "./Buttons";
 import styles from "./Navbar.module.scss";
 
 const Menu = (props: {
-  categories: { name: string }[];
+  categories: { name: string, slug: string }[];
   burgerState: boolean;
 }) => {
   const burgerActive: string = styles.navbarBurgerActive + " is-active";

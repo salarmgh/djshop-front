@@ -9,7 +9,7 @@ const Promoted = (props: { products: any }) => {
         {
           props.products.map((product, index) => {
             return (
-              <div className="column">
+              <div className="column is-one-quarter">
                 <Card>
                   <div className="card-image">
                     <figure className="image is-1by1">

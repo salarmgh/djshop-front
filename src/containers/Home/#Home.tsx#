@@ -5,6 +5,10 @@ import BoxImages from "../BoxImages/BoxImages";
 import BigBanner from "../../components/BigBanner/BigBanner";
 import Promoted from "../Promoted/Promoted";
 import axios from "axios";
+asdf
+asfd
+asdf
+asdf
 
 const Home = () => {
   const backendUrl = process.env.REACT_APP_BACKEND_BASE_URL;

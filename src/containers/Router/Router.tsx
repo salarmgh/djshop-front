@@ -11,7 +11,7 @@ export default function App() {
         <Route path="/product/:slug/">
           <Product />
         </Route>
-        <Route path="/category/:category">
+        <Route path="/category/:cat/">
           <Category />
         </Route>
         <Route exact path="/">

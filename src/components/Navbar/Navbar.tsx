@@ -7,7 +7,7 @@ import style from "./Navbar.module.scss";
 
 const Navbar = (props: { brandImage: string }) => {
   const [burgerState, setBurgerState] = useState(false);
-  const [categoriesState, setCategoriesState] = useState([{ name: "" }]);
+  const [categoriesState, setCategoriesState] = useState([{ name: "", slug: "" }]);
   const backendBaseUrl = process.env.REACT_APP_BACKEND_BASE_URL;
 
   const burgerHandler = () => {

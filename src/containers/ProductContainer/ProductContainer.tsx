@@ -21,6 +21,7 @@ const ProductContainer = (props: {
       slug: string;
     };
     price: number;
+    weight: number;
     attributes: {
       name: string;
       value: string;

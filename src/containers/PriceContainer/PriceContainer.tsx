@@ -1,8 +1,7 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import Card from "../Card/Card";
 import AddProductToCart from "../../components/AddProductToCart/AddProductToCart";
 import Price from "../../components/Price/Price";
-import Counter from "../../components/Counter/Counter";
 import styles from "./PriceContainer.module.scss";
 import "@fortawesome/fontawesome-free";
 import "bulma-divider";
@@ -15,6 +14,10 @@ const PriceContainer = (props: {
   setCount: (state: number) => void;
   basePrice: number;
 }) => {
+  const [productPrice, setProductPrice] = useState(0);
+  useEffect(() => {
+    setProductPrice(props.variant.price);
+  }, [props.variant.price])
   return (
     <Card>
       <div className="container">
@@ -25,24 +28,27 @@ const PriceContainer = (props: {
       </div>
       <div className="is-divider"></div>
       <div className={`container`}>
-        <div className="columns">
-          <div className="column">
-            <div style={{ marginBottom: "15px" }}><h3 className="title is-5">تعداد:</h3></div>
+        <div className="field">
+          <label className="label">تعداد</label>
+          <div className="control">
+            <input onChange={event => {
+              if (parseInt(event.target.value) >= 1) {
+                props.setCount(parseInt(event.target.value));
+                const price = parseInt(event.target.value) * props.variant.price;
+                setProductPrice(price);
+              }
+            }} className="input" type="number" value={props.count} style={{ width: "60px" }} />
           </div>
-          <div className="column">
-            <Counter
-              count={props.count}
-              setCount={props.setCount}
-              variant={props.variant}
-              setVariant={props.setVariant}
-              basePrice={props.basePrice}
-            />
-          </div>
+          <h3 className="subtitle is-6">قیمت پایه:
+            <Price price={props.variant.price} /> تومان
+          </h3>
+
         </div>
+
         <div className="is-divider"></div>
         <h3 className="subtitle is-2">
           <p>
-            قیمت: <Price price={props.price} />
+            قیمت: <Price price={productPrice} />
             <span className="subtitle is-6">
               تومان
               </span>

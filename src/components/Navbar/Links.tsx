@@ -3,7 +3,7 @@ import "bulma";
 import styles from "./Navbar.module.scss";
 
 const Links = (props: {
-  categories: { name: string }[];
+  categories: { name: string, slug: string }[];
   burgerState: boolean;
 }) => {
   const burgerActivated: string =
@@ -17,7 +17,7 @@ const Links = (props: {
             className={`navbar-item has-text-weight-bold ${
               props.burgerState ? burgerActivated : ""
               }`}
-            href={`/category/${link.name}/`}
+            href={`/category/${link.slug}/`}
           >
             {link.name}
           </a>

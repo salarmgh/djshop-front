@@ -1,0 +1,11 @@
+@import "../../css/colors.scss";
+.primary {
+  color: $primaryColor;
+  
+}
+
+
+
+.promoted {
+    margin-top: 50px;
+}

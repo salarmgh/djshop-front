@@ -6,7 +6,7 @@ const AddProductToCart = (props: {
   return (
     <button
       className="button is-black"
-      style={{ width: "100%" }}
+      style={{ width: "100%", borderRadius: "unset" }}
     >
       {props.title}
     </button>

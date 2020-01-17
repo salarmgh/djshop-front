@@ -6,15 +6,13 @@ const ProductAttributes = (props: {
   attributes: { name: string; value: string }[];
 }) => {
   return (
-    <React.Fragment>
-      <ul className={styles.attributes}>
-        {props.attributes.map(attribute => {
-          return (
-            <ProductAttribute name={attribute.name} value={attribute.value} />
-          );
-        })}
-      </ul>
-    </React.Fragment>
+    <table className="table is-fullwidth">
+      {props.attributes.map(attribute => {
+        return (
+          <ProductAttribute name={attribute.name} value={attribute.value} />
+        );
+      })}
+    </table>
   );
 };
 

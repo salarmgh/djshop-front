@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { useParams } from "react-router-dom";
 import axios from "axios";
 import Page from "../Layouts/Page";
 import Banner from "../../components/Banner/Banner";
@@ -8,6 +9,7 @@ import PriceSlider from "../../components/PriceSlider/PriceSlider";
 
 
 const Category = () => {
+  const { cat } = useParams();
   const queryString = require('query-string');
   const backendUrl = process.env.REACT_APP_BACKEND_BASE_URL;
   const [queryStr, setQueryStr] = useState("");
@@ -75,16 +77,9 @@ const Category = () => {
         let value = queryParsed.attribute.split(':')[1];
         filters[key] = [value];
       }
-
-      /* if (typeof queryParsed["min_price"] !== 'undefined') {
-       *   setCurrentPrice([parseInt(queryParsed["min_price"]), currentPrice[1]]);
-       * }
-       * if (typeof queryParsed["max_price"] !== 'undefined') {
-       *   setCurrentPrice([currentPrice[0], parseInt(queryParsed["max_price"])]);
-       * } */
     }
 
-    axios.get(`${backendUrl}/categories/necklace/`).then(({ data }) => {
+    axios.get(`${backendUrl}/categories/${cat}/`).then(({ data }) => {
       setCategory(data);
       const categoryAttributes = data.attributes.slice();
       categoryAttributes.forEach((categoryAttribute) => {
@@ -146,7 +141,7 @@ const Category = () => {
       window.history.pushState('', '', window.location.pathname + "?" + stringified);
     }
 
-    axios.get(`${backendUrl}/search/?categories=Necklace&${stringified}`).then(({ data }) => {
+    axios.get(`${backendUrl}/search/?categories=${category.name}&${stringified}`).then(({ data }) => {
       setProducts(data.results);
       setPrice([data.price_min, data.price_max]);
       if (currentPrice[0] === -1 && currentPrice[1] === -1) {
@@ -162,7 +157,7 @@ const Category = () => {
         setCurrentPrice([min_price, max_price]);
       }
     });
-  }, [backendUrl, attributes, queryStr, currentPrice]);
+  }, [backendUrl, attributes, queryStr, currentPrice, category]);
 
   const filterCheckHandler = (
     event: any

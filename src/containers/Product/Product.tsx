@@ -29,9 +29,15 @@ const Product = () => {
       slug: "product"
     },
     price: 0,
+    weight: 0,
     attributes: [
       {
         name: "name",
+        value: "value"
+      }
+    ],
+    size: [
+      {
         value: "value"
       }
     ]
@@ -40,6 +46,7 @@ const Product = () => {
 
   useEffect(() => {
     axios.get(`${backendUrl}/variants/${slug}/`).then(({ data }) => {
+      data.attributes.push({ name: "وزن", value: `${data.weight} گرم` });
       setVariant(data);
       setBasePrice(data.price);
     });
