@@ -8,7 +8,7 @@ const CategoryProducts = (props: { products: any }) => {
         props.products.map((product, index) => {
           return (
             <div key={index} className="column is-one-quarter">
-              <CategoryProduct product={{ image: product["_source"]["images"][0], title: product["_source"]["product"]["title"] + " " + product["_source"]["name"], price: product["_source"]["price"] }} />
+              <CategoryProduct product={{ image: product["_source"]["images"][0], title: product["_source"]["product"]["title"] + " " + product["_source"]["name"], price: product["_source"]["price"], slug: product["_source"]["product"]["slug"] }} />
             </div>
           )
 

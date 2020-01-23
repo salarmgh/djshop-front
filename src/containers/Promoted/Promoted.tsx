@@ -1,6 +1,7 @@
 import React from "react";
 import Card from "../Card/Card";
 import styles from "./Promoted.module.scss";
+import Price from "../../components/Price/Price";
 
 const Promoted = (props: { products: any }) => {
   return (
@@ -10,26 +11,26 @@ const Promoted = (props: { products: any }) => {
           props.products.map((product, index) => {
             return (
               <div className="column is-one-quarter">
-                <Card>
-                  <div className="card-image">
-                    <figure className="image is-1by1">
-                      <img src={product.image.image} alt="Placeholder image" />
-                    </figure>
-                  </div>
-
-                  <div className="card-content">
-                    <a href={`/product/${product.slug}/`}>
-                      <div className="media">
-                        <div className="media-content">
-                          <p className="title is-4">{product.name}</p>
-                        </div>
-                      </div>
-                    </a>
-                    <div className="content">
-                      {product.description}
+                <a href={`/product/${product.slug}`}>
+                  <div className="card">
+                    <div className="card-image">
+                      <figure className="image is-square">
+                        <img src={product.image.image} alt="Placeholder image" />
+                      </figure>
                     </div>
+                    <div className="card-content">
+                      <h5 className="title is-5 has-text-centered">
+                        {product.name}
+                      </h5>
+                    </div>
+                    <div className="card-footer">
+                      <div className="card-footer-item">
+                        <Price price={product.price} /> تومان
+                    </div>
+                    </div>
+
                   </div>
-                </Card>
+                </a>
               </div>
             )
           })

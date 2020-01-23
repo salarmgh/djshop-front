@@ -162,6 +162,7 @@ const Category = () => {
   const filterCheckHandler = (
     event: any
   ) => {
+    console.log("Triggered");
     const attributesFilter = attributes.slice();
     const key = event.target.value.split("|")[0];
     const value = event.target.value.split("|")[1];
@@ -188,7 +189,7 @@ const Category = () => {
 
   return (
     <Page>
-      <div className="container is-fluid">
+      <div style={{ direction: "rtl" }} className="container is-fluid">
         <Banner image={category.image} />
         <div className="columns">
           <div className="column is-one-quarter">

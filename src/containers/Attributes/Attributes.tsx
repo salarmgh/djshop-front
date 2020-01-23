@@ -3,7 +3,7 @@ import Attribute from "../../components/Attribute/Attribute";
 
 const Attributes = (props: { onChange: any, name: string, attributes: { value: string, checked: boolean; }[] }) => {
   return (
-    <div className="card-content">
+    <div>
       {
         props.attributes.map((attribute, index) => {
           return (
