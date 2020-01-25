@@ -16,6 +16,7 @@
     "bulma-checkradio": "^1.1.1",
     "bulma-divider": "^0.2.0",
     "bulma-extensions": "^6.2.7",
+    "bulma-steps": "^2.2.1",
     "jwt-decode": "^2.2.0",
     "node-sass": "^4.13.0",
     "persian-number": "^1.5.1",

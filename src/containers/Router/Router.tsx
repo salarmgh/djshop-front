@@ -5,6 +5,9 @@ import Product from "../Product/Product";
 import Category from "../Category/Category";
 import Login from "../Login/Login";
 import Profile from "../Profile/Profile";
+import Checkout from "../Checkout/Checkout";
+import AddressCheckout from "../AddressCheckout/AddressCheckout";
+import ShippingMethod from "../ShippingMethod/ShippingMethod";
 
 export default function App() {
   return (
@@ -22,6 +25,16 @@ export default function App() {
         <Route exact path="/profile/">
           <Profile />
         </Route>
+        <Route exact path="/checkout/">
+          <Checkout />
+        </Route>
+        <Route exact path="/address-checkout/">
+          <AddressCheckout />
+        </Route>
+        <Route exact path="/shipping-method/">
+          <ShippingMethod />
+        </Route>
+
         <Route exact path="/">
           <Home />
         </Route>
