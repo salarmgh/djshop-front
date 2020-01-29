@@ -2,6 +2,7 @@ import React from "react";
 import Card from "../Card/Card";
 import ProductInfo from "../../components/ProductInfo/ProductInfo";
 import PriceContainer from "../PriceContainer/PriceContainer";
+import Cookies from 'universal-cookie';
 
 const ProductContainer = (props: {
   variant: {
@@ -32,6 +33,12 @@ const ProductContainer = (props: {
   setCount: (state: number) => void;
   basePrice: number;
 }) => {
+  const addToCartHandler = () => {
+    const cookies = new Cookies();
+    const cart = cookies.get("cart");
+    cart[props.variant.id] = props.count;
+    cookies.set("cart", JSON.stringify(cart), { path: '/' });
+  }
   return (
     <section className="section is-medium">
       <div className="container">
@@ -47,6 +54,7 @@ const ProductContainer = (props: {
               count={props.count}
               setCount={props.setCount}
               basePrice={props.basePrice}
+              addToCartHandler={addToCartHandler}
             />
           </div>
         </div>

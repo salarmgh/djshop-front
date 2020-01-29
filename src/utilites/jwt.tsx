@@ -35,7 +35,7 @@ export function refreshToken(access) {
   })
     .then((res) => {
       if (res.status === 401) {
-        console.log("Will be redirected");
+        console.log("Not logged in");
       } else {
         res.json().then((resp) => {
           localStorage.setItem('auth-token', resp.access);
@@ -57,4 +57,11 @@ export function validateToken(access) {
         refreshToken(access);
       }
     });
+}
+
+export function isLoggedIn() {
+  const refreshToken = localStorage.getItem('auth-refresh');
+  if (refreshToken) {
+    validateToken(refreshToken);
+  }
 }

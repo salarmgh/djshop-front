@@ -9,7 +9,9 @@ import Checkout from "../Checkout/Checkout";
 import AddressCheckout from "../AddressCheckout/AddressCheckout";
 import ShippingMethod from "../ShippingMethod/ShippingMethod";
 
+
 export default function App() {
+
   return (
     <Router>
       <Switch>

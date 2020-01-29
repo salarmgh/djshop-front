@@ -4,15 +4,23 @@ import Brand from "./Brand";
 import Menu from "./Menu";
 import axios from "axios";
 import style from "./Navbar.module.scss";
+import { useSelector } from "react-redux";
 
 const Navbar = (props: { brandImage: string }) => {
   const [burgerState, setBurgerState] = useState(false);
   const [categoriesState, setCategoriesState] = useState([{ name: "", slug: "" }]);
   const backendBaseUrl = process.env.REACT_APP_BACKEND_BASE_URL;
 
+
   const burgerHandler = () => {
     setBurgerState(!burgerState);
   };
+
+  const loginStatus = useSelector(state => state);
+
+  useEffect(() => {
+    console.log(loginStatus);
+  }, [loginStatus]);
 
   useEffect(() => {
     axios
@@ -24,8 +32,8 @@ const Navbar = (props: { brandImage: string }) => {
   }, [backendBaseUrl]);
 
   return (
-    <nav
-      className={`navbar is-dark ${style.rtl} ${style.nav}`}
+    <nav style={{ direction: "rtl" }}
+      className={`navbar is-dark`}
       role="navigation"
       aria-label="main navigation"
     >

@@ -6,7 +6,7 @@ const Burger = (props: { burgerState: boolean; burgerHandler: () => void }) => {
   const burgerActive: string = style.navbarBurgerActive + " is-active";
   return (
     <button
-      className={`navbar-burger button is-dark ${style.navbarBurger}${
+      className={`is-dark navbar-burger button ${
         props.burgerState ? burgerActive : ""
         }`}
       style={{ marginLeft: 0, marginRight: "auto" }}

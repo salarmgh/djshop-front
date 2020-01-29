@@ -13,6 +13,7 @@ const PriceContainer = (props: {
   count: number;
   setCount: (state: number) => void;
   basePrice: number;
+  addToCartHandler: any;
 }) => {
   const [productPrice, setProductPrice] = useState(0);
   useEffect(() => {
@@ -54,7 +55,7 @@ const PriceContainer = (props: {
               </span>
           </p>
         </h3>
-        <AddProductToCart
+        <AddProductToCart handler={props.addToCartHandler}
           title="افزودن به سبد خرید"
         />
       </div>

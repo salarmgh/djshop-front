@@ -24,6 +24,7 @@ const Login = () => {
 
   const handleSubmit = (event: any) => {
     getToken(userInfo.username, userInfo.password);
+    window.location.href = "/";
   }
 
   return (

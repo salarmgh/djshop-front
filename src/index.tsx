@@ -5,8 +5,13 @@ import "./index.css";
 import Router from "./containers/Router/Router";
 import * as serviceWorker from "./serviceWorker";
 import "shabnam-font/dist/font-face.css";
+import LoginReducer from './reducers/LoginReducer';
+import { Provider } from 'react-redux';
+import { createStore } from 'redux';
 
-ReactDOM.render(<Router />, document.getElementById("root"));
+const store = createStore(LoginReducer);
+
+ReactDOM.render(<Provider store={store}><Router /></Provider>, document.getElementById("root"));
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.

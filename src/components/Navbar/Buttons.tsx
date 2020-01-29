@@ -1,28 +1,28 @@
 import React from "react";
 import "bulma";
 import styles from "./Navbar.module.scss";
+import { Login } from "../../actions/LoginActions";
+import { useDispatch } from "react-redux";
 
 const Buttons = (props: { burgerState: boolean }) => {
+  const dispatch = useDispatch();
   return (
-    <div className={`navbar-end ${styles.navbarEndRtl}`}>
-      <a
-        href="/"
-        className={
-          styles.signup + " navbar-item has-text-weight-bold has-text-centered"
-        }
-        style={props.burgerState ? { width: "100%" } : {}}
-      >
-        <p className={styles.centered}>ثبت نام</p>
+    <div className={`navbar-start`}>
+      <div className="columns is-vcentered">
+        <div className="column">
+          <a
+            onClick={() => {
+              dispatch(Login())
+            }}
+            className={
+              "button is-dark navbar-item has-text-weight-bold has-text-centered"
+            }
+            style={props.burgerState ? { width: "100%" } : {}}
+          >
+            ورود به حساب کاربری
       </a>
-      <a
-        href="/"
-        className={
-          styles.signin + " navbar-item has-text-weight-bold has-text-centered"
-        }
-        style={props.burgerState ? { width: "100%" } : {}}
-      >
-        <p className={styles.centered}>ورود</p>
-      </a>
+        </div>
+      </div>
     </div>
   );
 };
