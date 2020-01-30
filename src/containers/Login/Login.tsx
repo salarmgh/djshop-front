@@ -1,10 +1,21 @@
 import React, { useState } from "react";
 import Page from "../../containers/Layouts/Page";
 import "bulma-checkradio";
-import { getToken } from "../../utilites/jwt";
+import { useDispatch } from "react-redux";
+import { getToken, isTokenValid } from "../../utilites/jwt";
+import { useSelector } from "react-redux";
 
 const Login = () => {
+  const dispatch = useDispatch();
+  dispatch(isTokenValid());
+  const loginState = useSelector(state => state);
+
+  if (loginState === true) {
+    window.location.href = "/";
+  }
+
   const [userInfo, setUserInfo] = useState({ username: "", password: "", rememberMe: false });
+
   const handleUsername = (event: any) => {
     const userData = { ...userInfo };
     userData.username = event.target.value;
@@ -22,9 +33,8 @@ const Login = () => {
     setUserInfo(userData);
   }
 
-  const handleSubmit = (event: any) => {
-    getToken(userInfo.username, userInfo.password);
-    window.location.href = "/";
+  const HandleSubmit = (event: any) => {
+    dispatch(getToken(userInfo.username, userInfo.password));
   }
 
   return (
@@ -67,7 +77,7 @@ const Login = () => {
                         </label>
                     </div>
                     <div className="field">
-                      <button onClick={handleSubmit} style={{ borderRadius: "unset" }} className="button is-fullwidth is-dark">ورود</button>
+                      <button onClick={HandleSubmit} style={{ borderRadius: "unset" }} className="button is-fullwidth is-dark">ورود</button>
                     </div>
                   </div>
                 </div>

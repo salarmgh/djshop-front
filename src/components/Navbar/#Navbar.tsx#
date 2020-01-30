@@ -4,8 +4,6 @@ import Brand from "./Brand";
 import Menu from "./Menu";
 import axios from "axios";
 import style from "./Navbar.module.scss";
-import { useSelector, useDispatch } from "react-redux";
-import { isTokenValid } from "../../utilites/jwt";
 
 
 const Navbar = (props: { brandImage: string }) => {
@@ -18,8 +16,6 @@ const Navbar = (props: { brandImage: string }) => {
     setBurgerState(!burgerState);
   };
 
-  const dispatch = useDispatch();
-  dispatch(isTokenValid());
 
   const loginState = useSelector(state => state);
 

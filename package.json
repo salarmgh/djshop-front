@@ -16,6 +16,7 @@
     "bulma-checkradio": "^1.1.1",
     "bulma-divider": "^0.2.0",
     "bulma-extensions": "^6.2.7",
+    "bulma-quickview": "^2.0.0",
     "bulma-steps": "^2.2.1",
     "jwt-decode": "^2.2.0",
     "node-sass": "^4.13.0",
@@ -30,6 +31,7 @@
     "react-router-dom": "^5.1.2",
     "react-scripts": "3.2.0",
     "redux": "^4.0.5",
+    "redux-thunk": "^2.3.0",
     "shabnam-font": "^5.0.0",
     "typescript": "3.6.4",
     "universal-cookie": "^4.0.3"

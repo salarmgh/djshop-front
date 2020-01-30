@@ -3,7 +3,7 @@ const LoginReducer = (state = false, action) => {
     case 'LOG_IN':
       return true;
     case 'LOG_OUT':
-      return false;
+      return false
     default:
       return state;
   }

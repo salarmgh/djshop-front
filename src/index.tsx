@@ -7,9 +7,11 @@ import * as serviceWorker from "./serviceWorker";
 import "shabnam-font/dist/font-face.css";
 import LoginReducer from './reducers/LoginReducer';
 import { Provider } from 'react-redux';
-import { createStore } from 'redux';
+import { createStore, applyMiddleware } from 'redux';
+import thunk from "redux-thunk";
 
-const store = createStore(LoginReducer);
+
+const store = createStore(LoginReducer, applyMiddleware(thunk));
 
 ReactDOM.render(<Provider store={store}><Router /></Provider>, document.getElementById("root"));
 

@@ -1,67 +1,65 @@
 import axios from "axios";
+import { Login, Logout } from "../actions/LoginActions";
+import { useDispatch } from "react-redux";
 
-const backendUrl = process.env.REACT_APP_BACKEND_BASE_URL;
+const backendBaseUrl = process.env.REACT_APP_BACKEND_BASE_URL;
 
-export function getToken(username, password) {
-  fetch(`${backendUrl}/token/obtain/`, {
-    method: 'post',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({
-      'username': username,
-      'password': password
-    })
-  })
-    .then((res) => {
-      if (res.status === 401) {
-        console.log("401!");
-      } else {
-        res.json().then((resp) => {
-          let jwtDecode = require('jwt-decode');
-          localStorage.setItem('user-info', JSON.stringify(jwtDecode(resp.access)));
-          localStorage.setItem('auth-token', resp.access);
-          localStorage.setItem('auth-refresh', resp.refresh);
-        })
+export const getToken = (username, password) => {
+  return dispatch => {
+    axios.post(`${backendBaseUrl}/token/obtain/`, { username: username, password: password }, {
+      headers: {
+        'Content-Type': 'application/json'
       }
-    });
-}
-
-export function refreshToken(access) {
-  fetch(`${backendUrl}/token/refresh/`, {
-    method: 'post',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({
-      'refresh': localStorage.getItem('auth-refresh')
     })
-  })
-    .then((res) => {
-      if (res.status === 401) {
-        console.log("Not logged in");
-      } else {
-        res.json().then((resp) => {
-          localStorage.setItem('auth-token', resp.access);
-        })
-      }
-    });
-}
-
-export function validateToken(access) {
-  fetch(`${backendUrl}/token/verify/`, {
-    method: 'post',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({
-      'token': localStorage.getItem('auth-token')
-    })
-  })
-    .then((res) => {
-      if (res.status === 401) {
-        refreshToken(access);
-      }
-    });
-}
-
-export function isLoggedIn() {
-  const refreshToken = localStorage.getItem('auth-refresh');
-  if (refreshToken) {
-    validateToken(refreshToken);
+      .then(res => {
+        let jwtDecode = require('jwt-decode');
+        localStorage.setItem('auth-token', res.data.access);
+        localStorage.setItem('auth-refresh', res.data.refresh);
+        const userData = jwtDecode(res.data.access)
+        localStorage.setItem('user-info', JSON.stringify({ email: userData.email, firstName: userData.first_name, lastName: userData.last_name, number: userData.number, userId: userData.user_id }));
+        dispatch(Login());
+      })
+      .catch(error => {
+        localStorage.removeItem('auth-token');
+        localStorage.removeItem('auth-refresh');
+        localStorage.removeItem('user-info');
+        dispatch(Logout());
+      });
   }
+}
+
+export function refreshToken() {
+  return dispatch => {
+    axios.post(`${backendBaseUrl}/token/refresh/`, { refresh: localStorage.getItem('auth-refresh') }, {
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    })
+      .then((resp) => {
+        localStorage.setItem('auth-token', resp.data.access);
+        dispatch(Login());
+      })
+      .catch(() => {
+        localStorage.removeItem('auth-token');
+        localStorage.removeItem('auth-refresh');
+        localStorage.removeItem('user-info');
+        dispatch(Logout());
+      });
+  };
+}
+
+export const isTokenValid = () => {
+  return dispatch => {
+    axios.post(`${backendBaseUrl}/token/verify/`, { token: localStorage.getItem('auth-token') }, {
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    })
+      .then(() => {
+        dispatch(Login());
+      })
+      .catch(() => {
+        dispatch(refreshToken());
+      });
+  };
 }
