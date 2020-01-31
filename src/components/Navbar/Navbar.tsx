@@ -3,7 +3,6 @@ import "bulma";
 import Brand from "./Brand";
 import Menu from "./Menu";
 import axios from "axios";
-import style from "./Navbar.module.scss";
 import { useSelector, useDispatch } from "react-redux";
 import { isTokenValid } from "../../utilites/jwt";
 

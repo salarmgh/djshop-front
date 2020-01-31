@@ -1,34 +1,17 @@
 import React from "react";
 import Page from "../Layouts/Page";
+import MenuLinks from "../Menus/Menus";
+
 
 const Profile = () => {
+  const menus = [
+    {}
+  ]
   return (
     <Page>
       <div style={{ direction: "rtl" }} className="container">
         <div className="columns">
           <div className="column is-one-quarter">
-            <aside className="menu">
-              <p className="menu-label">
-                پروفایل
-              </p>
-              <ul className="menu-list">
-                <li><a>تغییر اطلاعات کاربری</a></li>
-                <li><a>تغییر پسورد</a></li>
-              </ul>
-              <p className="menu-label">
-                آدرس ها
-              </p>
-              <ul className="menu-list">
-                <li><a>مدیریت آدرس ها</a></li>
-              </ul>
-              <p className="menu-label">
-                سفارشات
-              </p>
-              <ul className="menu-list">
-                <li><a>سفارش های من</a></li>
-                <li><a>پیگیری سفارش</a></li>
-              </ul>
-            </aside>
           </div>
           <div className="column">
             <div className="card" style={{ marginBottom: "25px" }}>
