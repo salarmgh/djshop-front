@@ -5,13 +5,13 @@ import "./index.css";
 import Router from "./containers/Router/Router";
 import * as serviceWorker from "./serviceWorker";
 import "shabnam-font/dist/font-face.css";
-import LoginReducer from './reducers/LoginReducer';
+import Reducers from './reducers';
 import { Provider } from 'react-redux';
 import { createStore, applyMiddleware } from 'redux';
 import thunk from "redux-thunk";
 
 
-const store = createStore(LoginReducer, applyMiddleware(thunk));
+const store = createStore(Reducers, applyMiddleware(thunk));
 
 ReactDOM.render(<Provider store={store}><Router /></Provider>, document.getElementById("root"));
 

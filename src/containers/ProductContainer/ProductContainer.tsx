@@ -35,9 +35,9 @@ const ProductContainer = (props: {
 }) => {
   const addToCartHandler = () => {
     const cookies = new Cookies();
-    const cart = {};
+    let cart = {};
     if (cookies.get("cart") !== undefined) {
-      const cart = cookies.get("cart");
+      cart = cookies.get("cart");
     }
     cart[props.variant.id] = props.count;
     cookies.set("cart", JSON.stringify(cart), { path: '/' });

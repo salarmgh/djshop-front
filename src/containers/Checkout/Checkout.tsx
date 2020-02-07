@@ -1,11 +1,45 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Page from "../Layouts/Page";
 import Price from "../../components/Price/Price";
 import "bulma-divider";
 import styles from "./Checkout.module.scss";
 import "bulma-steps/dist/css/bulma-steps.min.css";
+import CheckoutItems from "../CheckoutItems/CheckoutItems";
+import Cookies from 'universal-cookie';
+import axios from "axios";
+import { useDispatch, useSelector } from "react-redux";
+
 
 const Checkout = () => {
+  const backendUrl = process.env.REACT_APP_BACKEND_BASE_URL;
+  const [cart, setCart] = useState({});
+  const [products, setProducts] = useState([{ id: 1, title: "title", url: "/", images: ["http://localhost"], count: 1, product: { title: "" }, attributes: [{ name: "", value: "" }], price: 0 }]);
+
+  const totalPrice = useSelector(state => state.CheckoutPrice);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    const cookies = new Cookies();
+
+    if (cookies.get("cart") !== undefined) {
+      setCart(cookies.get("cart"));
+    }
+  }, []);
+
+  useEffect(() => {
+    const ids = Object.keys(cart).join();
+    if (ids !== "") {
+      axios.get(`${backendUrl}/variants-by-id/${ids}/`).then(({ data }) => {
+        const cartProducts = [...data.results];
+        cartProducts.forEach((product) => {
+          product.count = cart[product.id];
+          dispatch({ type: "CHANGE_TOTAL_PRICE", data: (product.price * product.count) })
+        })
+        setProducts(cartProducts);
+      })
+    }
+  }, [cart])
+
   return (
     <Page>
       <div style={{ direction: "rtl" }} className="container">
@@ -18,138 +52,7 @@ const Checkout = () => {
                 </div>
               </div>
               <div className="card-content">
-                <div className="columns">
-                  <div className="column is-one-third">
-                    <figure className="image is-128x128">
-                      <img src="http://localhost:8080/media/images/products/64419417_356003048445514_5746755503251399916_n.jpg" />
-                    </figure>
-                  </div>
-                  <div className="column is-one-third">
-                    <a href="#"><h4 className="title is-4">گردنبند ستونی نقره</h4></a>
-                    <table className="table is-fullwidth">
-                      <tr>
-                        <th>
-                          <p className="has-text-centered">
-                            جنسیت
-                          </p>
-                        </th>
-                        <td>
-                          <p className="has-text-centered">
-                            -
-                          </p>
-                        </td>
-                      </tr>
-                      <tr>
-                        <th>
-                          <p className="has-text-centered">
-                            جنس
-                          </p>
-                        </th>
-                        <td>
-                          <p className="has-text-centered">
-                            نقره
-                          </p>
-                        </td>
-                      </tr>
-                      <tr>
-                        <th>
-                          <p className="has-text-centered">
-                            وزن
-                          </p>
-                        </th>
-                        <td>
-                          <p className="has-text-centered">
-                            120.7 گرم
-                          </p>
-                        </td>
-                      </tr>
-                    </table>
-                  </div>
-                  <div className="column is-one-third">
-                    <div className="field">
-                      <label className="label">تعداد</label>
-                      <input className="input" type="number" value={1} style={{ width: "60px" }} />
-
-                    </div>
-                    <h3 className="subtitle is-5">
-                      <p>
-                        قیمت: <Price price={100000} />
-                        <span className="subtitle is-6">
-                          تومان
-                        </span>
-                      </p>
-                    </h3>
-
-                  </div>
-
-                </div>
-                <div className="is-divider"></div>
-                <div className="columns">
-                  <div className="column is-one-third">
-                    <figure className="image is-128x128">
-                      <img src="http://localhost:8080/media/images/products/64419417_356003048445514_5746755503251399916_n.jpg" />
-                    </figure>
-                  </div>
-                  <div className="column is-one-third">
-                    <a href="#"><h4 className="title is-4">گردنبند ستونی نقره</h4></a>
-                    <table className="table is-fullwidth">
-                      <tr>
-                        <th>
-                          <p className="has-text-centered">
-                            جنسیت
-                          </p>
-                        </th>
-                        <td>
-                          <p className="has-text-centered">
-                            -
-                          </p>
-                        </td>
-                      </tr>
-                      <tr>
-                        <th>
-                          <p className="has-text-centered">
-                            جنس
-                          </p>
-                        </th>
-                        <td>
-                          <p className="has-text-centered">
-                            نقره
-                          </p>
-                        </td>
-                      </tr>
-                      <tr>
-                        <th>
-                          <p className="has-text-centered">
-                            وزن
-                          </p>
-                        </th>
-                        <td>
-                          <p className="has-text-centered">
-                            120.7 گرم
-                          </p>
-                        </td>
-                      </tr>
-                    </table>
-                  </div>
-                  <div className="column is-one-third">
-                    <div className="field">
-                      <label className="label">تعداد</label>
-                      <input className="input" type="number" value={1} style={{ width: "60px" }} />
-
-                    </div>
-                    <h3 className="subtitle is-5">
-                      <p>
-                        قیمت: <Price price={100000} />
-                        <span className="subtitle is-6">
-                          تومان
-                        </span>
-                      </p>
-                    </h3>
-
-                  </div>
-
-                </div>
-
+                <CheckoutItems setProducts={setProducts} products={products} />
               </div>
             </div>
 
@@ -167,14 +70,21 @@ const Checkout = () => {
                 <p>تعداد کالا: 2</p>
                 <h3 className="subtitle is-3">
                   <p>
-                    قیمت: <Price price={200000} />
+                    قیمت: <Price price={totalPrice} />
                     <span className="subtitle is-6">
                       تومان
                     </span>
                   </p>
                 </h3>
 
-                <button className="button is-fullwidth is-dark">ادامه فرایند</button>
+                <a href="/address-checkout/" onClick={() => {
+                  const allProducts = {};
+                  products.forEach((product) => {
+                    allProducts[product.id] = product.count;
+                  })
+                  const cookies = new Cookies();
+                  cookies.set("cart", JSON.stringify(allProducts), { path: '/' });
+                }} className="button is-fullwidth is-dark">ادامه فرایند</a>
               </div>
             </div>
           </div>

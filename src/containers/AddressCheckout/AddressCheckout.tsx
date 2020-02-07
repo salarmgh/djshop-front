@@ -51,7 +51,7 @@ const AddressCheckout = () => {
                   </p>
                 </h3>
 
-                <button className="button is-fullwidth is-dark">ادامه فرایند</button>
+                <a href="/shipping-method/" className="button is-fullwidth is-dark">ادامه فرایند</a>
               </div>
             </div>
           </div>

@@ -25,7 +25,7 @@ const Buttons = (props: { burgerState: boolean }) => {
           </React.Fragment>
           :
           <div className="column">
-            <ProfileIcon profile={{ url: "/profile/", icon: "fas fa-user" }} />
+            <ProfileIcon profile={{ url: "/login/", icon: "fas fa-user" }} />
           </div>
         }
       </div>

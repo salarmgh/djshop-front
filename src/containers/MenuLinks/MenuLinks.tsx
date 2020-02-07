@@ -1,22 +1,16 @@
 import React from "react";
-import Link from "../../components/Link/Link";
 
-const MenuLinks = (props: { menu: { title: string, links: string[] }[] }) => {
+const MenuLinks = (props: { menu: { title: string, url: string }[] }) => {
   return (
-    <React.Fragment>
-      <p className="menu-label">
-        {props.menu.title}
-      </p>
-      <ul className="menu-list">
-        {
-          props.menu.links.map((link) => {
-            return (
-              <Link link={link} />
-            )
-          })
-        }
-      </ul>
-    </React.Fragment>
+    <ul className="menu-list">
+      {
+        props.menu.map((menu) => {
+          return (
+            <li><a href={menu.url}>{menu.title}</a></li>
+          )
+        })
+      }
+    </ul>
   )
 }
 

@@ -7,14 +7,14 @@ const QuickCartItem = (props: { product: any }) => {
       <article className="media" style={{ marginTop: "15px" }}>
         <figure className="media-left">
           <p className="image is-128x128">
-            <img src={props.product.image} />
+            <img src={props.product.images[0].image} />
           </p>
         </figure>
         <div className="media-content" style={{ marginRight: "15px" }}>
           <div className="content" style={{ textAlign: "right" }}>
             <p>
-              <a href={props.product.url}>
-                <h5 className="title is-5">گردنبند ستونی</h5>
+              <a href={`/product/${props.product.slug}/`}>
+                <h5 className="title is-5">{props.product.product.title + " " + props.product.name}</h5>
               </a>
               <div className="field">
                 <div className="control">
@@ -32,7 +32,7 @@ const QuickCartItem = (props: { product: any }) => {
         </div>
       </article>
       <div className="is-divider"></div>
-    </React.Fragment>
+    </React.Fragment >
   )
 }
 

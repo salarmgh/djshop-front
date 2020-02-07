@@ -1,11 +1,36 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import QuickCartItems from "../../containers/QuickCartItems/QuickCartItems";
 import bulmaQuickview from "bulma-quickview/dist/js/bulma-quickview.min.js";
 import "bulma-quickview/dist/css/bulma-quickview.min.css";
+import Cookies from 'universal-cookie';
+import axios from "axios";
 
 const QuickCartView = () => {
+  const backendUrl = process.env.REACT_APP_BACKEND_BASE_URL;
+  const [cart, setCart] = useState({});
+  const [products, setProducts] = useState([{ title: "title", url: "/", images: ["http://localhost"], count: 1, product: { title: "" } }]);
+  useEffect(() => {
+    const cookies = new Cookies();
+
+    if (cookies.get("cart") !== undefined) {
+      setCart(cookies.get("cart"));
+    }
+  }, []);
+
+  useEffect(() => {
+    const ids = Object.keys(cart).join();
+    if (ids !== "") {
+      axios.get(`${backendUrl}/variants-by-id/${ids}/`).then(({ data }) => {
+        const cartProducts = [...data.results];
+        cartProducts.forEach((product) => {
+          product.count = cart[product.id];
+        })
+        setProducts(cartProducts);
+      })
+    }
+  }, [cart])
   const quickviews = bulmaQuickview.attach();
-  const [products, setProducts] = useState([{ title: "ینوتس دنبندرگ", url: "/", image: "https://bulma.io/images/placeholders/128x128.png", count: 1, price: 100000 }, { title: "گردنبند ستونی", url: "/", image: "https://bulma.io/images/placeholders/128x128.png", count: 1, price: 100000 }]);
+
   return (
     <React.Fragment>
       <div id="quickviewDefault" className="quickview" style={{ color: "black" }}>
