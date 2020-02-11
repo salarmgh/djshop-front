@@ -35,11 +35,11 @@ const ProductContainer = (props: {
 }) => {
   const addToCartHandler = () => {
     const cookies = new Cookies();
-    let cart = {};
+    let cart = { products: {} };
     if (cookies.get("cart") !== undefined) {
       cart = cookies.get("cart");
     }
-    cart[props.variant.id] = props.count;
+    cart["products"][props.variant.id] = props.count;
     cookies.set("cart", JSON.stringify(cart), { path: '/' });
   }
   return (

@@ -7,7 +7,7 @@ import axios from "axios";
 
 const QuickCartView = () => {
   const backendUrl = process.env.REACT_APP_BACKEND_BASE_URL;
-  const [cart, setCart] = useState({});
+  const [cart, setCart] = useState({ products: {} });
   const [products, setProducts] = useState([{ title: "title", url: "/", images: ["http://localhost"], count: 1, product: { title: "" } }]);
   useEffect(() => {
     const cookies = new Cookies();
@@ -18,7 +18,7 @@ const QuickCartView = () => {
   }, []);
 
   useEffect(() => {
-    const ids = Object.keys(cart).join();
+    const ids = Object.keys(cart.products).join();
     if (ids !== "") {
       axios.get(`${backendUrl}/variants-by-id/${ids}/`).then(({ data }) => {
         const cartProducts = [...data.results];

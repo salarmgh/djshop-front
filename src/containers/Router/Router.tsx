@@ -33,7 +33,7 @@ export default function App() {
         <Route exact path="/address-checkout/">
           <AddressCheckout />
         </Route>
-        <Route exact path="/shipping-method/">
+        <Route exact path="/shipping-methods/">
           <ShippingMethod />
         </Route>
 
