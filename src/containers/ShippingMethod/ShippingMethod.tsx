@@ -50,6 +50,15 @@ const ShippingMethod = () => {
     productsShipping["shippingMethod"] = currentShippingMethod;
     const cookies = new Cookies();
     cookies.set("cart", JSON.stringify(productsShipping), { path: '/' });
+    axios.post(`${backendUrl}/create-order/`, { products: productsShipping }, {
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: "Bearer " + localStorage.getItem('auth-token')
+      }
+    })
+      .then((resp) => {
+        console.log(resp);
+      })
   }
 
 
