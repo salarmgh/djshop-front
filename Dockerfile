@@ -11,9 +11,13 @@ RUN echo "--modules-folder /opt/node_modules" >> /home/node/.yarnrc && echo "--c
 
 COPY ["package.json", "yarn.lock", "/opt/app/"]
 
+USER node
+
 RUN yarn install
 
 COPY [".", "/opt/app/"]
+
+USER root
 
 RUN chown node:node /opt/app
 
