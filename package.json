@@ -19,7 +19,7 @@
     "bulma-quickview": "^2.0.0",
     "bulma-steps": "^2.2.1",
     "jwt-decode": "^2.2.0",
-    "node-sass": "^4.13.0",
+    "node-sass": "^7.0.0",
     "persian-number": "^1.5.1",
     "query-string": "^6.9.0",
     "rc-slider": "^8.7.1",
